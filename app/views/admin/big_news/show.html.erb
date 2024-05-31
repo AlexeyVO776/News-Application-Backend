@@ -1,0 +1,10 @@
+<h1><%= @big_news.title %></h1>
+<p><%= @big_news.content %></p>
+<p><strong>Visible:</strong> <%= @big_news.visible ? 'Yes' : 'No' %></p>
+<p>
+  <%= image_tag @big_news.image.url if @big_news.image.present? %>
+</p>
+
+<%= link_to 'Edit', edit_admin_big_news_path(@big_news) %>
+<%= link_to 'Back', admin_big_news_index_path %>
+

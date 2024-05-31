@@ -1,0 +1,28 @@
+<h1>News</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Content</th>
+    <th>Visible</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @big_news.each do |news_item| %>
+    <tr>
+      <td><%= news_item.title %></td>
+      <td><%= truncate(news_item.content, length: 100) %></td>
+      <td><%= news_item.visible ? 'Yes' : 'No' %></td>
+      <td>
+        <%= link_to 'Show', admin_big_news_path(news_item) %>
+        <%= link_to 'Edit', edit_admin_big_news_path(news_item) %>
+        <%= button_to 'Destroy', admin_big_news_path(news_item), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New News', new_admin_big_news_path %>
