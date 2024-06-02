@@ -52,7 +52,6 @@ contents = [
  Vestibulum nec diam non lorem porttitor hendrerit non a dui."
 ]
 
-
 10.times do |n|
   image_path = Rails.root.join("path/to/image_#{n + 1}.jpg")
   BigNews.create!(

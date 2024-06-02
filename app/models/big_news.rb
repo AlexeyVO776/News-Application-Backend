@@ -9,7 +9,7 @@ class BigNews < ApplicationRecord
   private
 
   def image_size_validation
-    errors.add(:image) if image.size > 2.megabytes
+    errors.add(:image, "should be less than 2MB") if image.size > 2.megabytes
   end
 
   def image_content_type_validation
