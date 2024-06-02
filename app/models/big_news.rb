@@ -1,6 +1,5 @@
 class BigNews < ApplicationRecord
   mount_uploader :image, ImageUploader
-  mount_uploader :image, ImageUploader
 
   validates :title, presence: true
   validates :content, presence: true
@@ -10,11 +9,11 @@ class BigNews < ApplicationRecord
   private
 
   def image_size_validation
-    errors.add(:image, "should be less than 5MB") if image.size > 5.megabytes
+    errors.add(:image) if image.size > 2.megabytes
   end
 
   def image_content_type_validation
-    allowed_types = %w[image/jpeg image/png]
-    errors.add(:image, "must be a JPEG or PNG") unless allowed_types.include?(image.content_type)
+    allowed_types = %w[image/jpeg image/png image/jpg]
+    errors.add(:image) unless allowed_types.include?(image.content_type)
   end
 end

@@ -6,9 +6,7 @@ module Admin
       @big_news = BigNews.all
     end
 
-    def show
-      @big_news = BigNews.find(params[:id])
-    end
+    def show; end
 
     def new
       @big_news = BigNews.new
@@ -17,28 +15,32 @@ module Admin
     def create
       @big_news = BigNews.new(big_news_params)
       if @big_news.save
+        flash[:success] = "Новость успешно добавлена."
         redirect_to admin_big_news_path(@big_news)
       else
-        render :new
+        flash[:error] = @big_news.errors.full_messages.join(", ")
+        redirect_to new_admin_big_news_path
       end
     end
 
-    def edit
-      @big_news = BigNews.find(params[:id])
-    end
+    def edit; end
 
     def update
-      @big_news = BigNews.find(params[:id])
       if @big_news.update(big_news_params)
+        flash[:success] = "Новость успешно обновлена."
         redirect_to admin_big_news_path(@big_news)
       else
-        render :edit
+        flash[:error] = @big_news.errors.full_messages.join(", ")
+        redirect_to edit_admin_big_news_path(@big_news)
       end
     end
 
     def destroy
-      @big_news = BigNews.find(params[:id])
-      @big_news.destroy
+      if @big_news.destroy
+        flash[:success] = "Новость успешно удалена."
+      else
+        flash[:error] = "Не удалось удалить новость."
+      end
       redirect_to admin_big_news_index_path
     end
 

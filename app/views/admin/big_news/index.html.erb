@@ -1,28 +1,34 @@
-<h1>News</h1>
+<div class="container">
+  <h1>Список новостей</h1>
 
-<table>
-  <thead>
-  <tr>
-    <th>Title</th>
-    <th>Content</th>
-    <th>Visible</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @big_news.each do |news_item| %>
+  <div class="new-news-button-container">
+    <%= link_to 'Добавить новость', new_admin_big_news_path, class: 'button' %>
+  </div>
+
+  <table>
+    <thead>
     <tr>
-      <td><%= news_item.title %></td>
-      <td><%= truncate(news_item.content, length: 100) %></td>
-      <td><%= news_item.visible ? 'Yes' : 'No' %></td>
-      <td>
-        <%= link_to 'Show', admin_big_news_path(news_item) %>
-        <%= link_to 'Edit', edit_admin_big_news_path(news_item) %>
-        <%= button_to 'Destroy', admin_big_news_path(news_item), method: :delete, data: { confirm: 'Are you sure?' } %>
-      </td>
+      <th>Название</th>
+      <th>Содержание</th>
+      <th>Новость публикуется</th>
+      <th id="date-header" class="sortable">Дата создания</th>
+      <th>Действия</th>
     </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<%= link_to 'New News', new_admin_big_news_path %>
+    </thead>
+    <tbody id="news-table-body">
+    <% @big_news.each do |news_item| %>
+      <tr>
+        <td><%= news_item.title%></td>
+        <td><%= truncate(news_item.content, length: 100) %></td>
+        <td><%= news_item.visible ? 'Да' : 'Нет' %></td>
+        <td><%= news_item.created_at.strftime("%d.%m.%Y") %></td>
+        <td class="action-buttons">
+          <%= link_to 'Просмотреть', admin_big_news_path(news_item), class: 'button action-button' %>
+          <%= link_to 'Изменить', edit_admin_big_news_path(news_item), class: 'button action-button' %>
+          <%= button_to 'Удалить', admin_big_news_path(news_item), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'button action-button' %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

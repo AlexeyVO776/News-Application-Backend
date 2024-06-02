@@ -8,3 +8,7 @@ Style/Documentation:
 
 
 inherit_from: .rubocop_todo.yml
+
+Metrics/BlockLength:
+  Max: 35
+  ExcludedMethods: ['describe', 'context', 'feature', 'scenario', 'xdescribe', 'xcontext', 'fdescribe', 'fcontext']

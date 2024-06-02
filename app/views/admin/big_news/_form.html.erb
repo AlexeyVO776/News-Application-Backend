@@ -1,36 +1,27 @@
-<%= form_with(model: [:admin, @big_news], local: true) do |form| %>
-  <% if @big_news.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@big_news.errors.count, "error") %> prohibited this news from being saved:</h2>
-      <ul>
-        <% @big_news.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="container">
+  <%= form_with(model: [:admin, @big_news], local: true) do |form| %>
+    <div>
+      <%= form.label 'Название' %>
+      <%= form.text_field :title %>
+    </div>
+
+    <div>
+      <%= form.label 'Содержание' %>
+      <%= form.text_area :content %>
+    </div>
+
+    <div>
+      <%= form.label 'Фото' %>
+      <%= form.file_field :image %>
+    </div>
+
+    <div>
+      <%= form.label 'Новость публикуется' %>
+      <%= form.check_box :visible %>
+    </div>
+
+    <div>
+      <%= form.submit 'Создать новость'%>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div>
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-  </div>
-
-  <div>
-    <%= form.label :image %>
-    <%= form.file_field :image %>
-  </div>
-
-  <div>
-    <%= form.label :visible %>
-    <%= form.check_box :visible %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
